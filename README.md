@@ -1,41 +1,19 @@
-# Chirpy Starter
+# Unpublished Posts Enhancement for Chirpy Theme
 
 [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
 [![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
 
-When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders
-`_data`, `_layouts`, `_includes`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file
-from the theme's gem. If you have ever installed this theme gem, you can use the command
-`bundle info --path jekyll-theme-chirpy` to locate these files.
-
-The Jekyll team claims that this is to leave the ball in the user’s court, but this also results in users not being
-able to enjoy the out-of-the-box experience when using feature-rich themes.
-
-To fully use all the features of **Chirpy**, you need to copy the other critical files from the theme's gem to your
-Jekyll site. The following is a list of targets:
-
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
-```
-
-To save you time, and also in case you lose some files while copying, we extract those files/configurations of the
-latest version of the **Chirpy** theme and the [CD][CD] workflow to here, so that you can start writing in minutes.
-
-## Prerequisites
-
-Follow the instructions in the [Jekyll Docs](https://jekyllrb.com/docs/installation/) to complete the installation of
-the basic environment. [Git](https://git-scm.com/) also needs to be installed.
+*Derived from Chirpy theme*
 
 ## Installation
 
-Sign in to GitHub and [**use this template**][use-template] to generate a brand new repository and name it
-`USERNAME.github.io`, where `USERNAME` represents your GitHub username.
+### Creating a New URL
 
-Then clone it to your local machine and run:
+Sign in to GitHub and browse to [**unpublished-posts-enhancement**](https://github.com/Jo-CRuiSe/unpublished-posts-enhancement), click the button <kbd>Use this template</kbd> > <kbd>Create a new repository</kbd>, and name the new repository to what you like which represents your unpulished posts pages URL.
+
+### Installing Dependencies
+
+Before running local server for the first time, go to the root directory of your site and run:
 
 ```console
 $ bundle
@@ -43,7 +21,55 @@ $ bundle
 
 ## Usage
 
-Please see the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy#documentation).
+You may want to preview the site contents before publishing, so just run it by:
+
+```console
+$ bundle exec jekyll s
+```
+
+After a few seconds, the local service will be published at _<http://127.0.0.1:4000>_.
+
+## Deployment
+
+Before the deployment begins, check out the file `_config.yml`{: .filepath} and make sure the `url` is configured correctly. Remember to change the `baseurl` to your project name that starts with a slash, e.g, `/project-name`.
+
+Now you can choose _ONE_ of the following methods to deploy your Jekyll site.
+
+### Deploy by Using GitHub Actions
+
+There are a few things to get ready for.
+
+- If you're on the GitHub Free plan, keep your site repository public.
+- If you have committed `Gemfile.lock`{: .filepath} to the repository, and your local machine is not running Linux, go to the root of your site and update the platform list of the lock-file:
+
+  ```console
+  $ bundle lock --add-platform x86_64-linux
+  ```
+
+Next, configure the _Pages_ service.
+
+1. Browse to your repository on GitHub. Select the tab _Settings_, then click _Pages_ in the left navigation bar. Then, in the **Source** section (under _Build and deployment_), select [**GitHub Actions**][pages-workflow-src] from the dropdown menu.  
+
+2. Push any commits to GitHub to trigger the _Actions_ workflow. In the _Actions_ tab of your repository, you should see the workflow _Build and Deploy_ running. Once the build is complete and successful, the site will be deployed automatically.
+
+At this point, you can go to the URL indicated by GitHub to access your site.
+
+### Manually Build and Deploy
+
+On self-hosted servers, you cannot enjoy the convenience of **GitHub Actions**. Therefore, you should build the site on your local machine and then upload the site files to the server.
+
+Go to the root of the source project, and build your site as follows:
+
+```console
+$ JEKYLL_ENV=production bundle exec jekyll b
+```
+
+Unless you specified the output path, the generated site files will be placed in folder `_site`{: .filepath} of the project's root directory. Now you should upload those files to the target server.
+
+## Configuration
+
+[This blog](https://jo-cruise.github.io/2024-02-06-HowToUseUPE) will guide you to complete relative configuration.
+
 
 ## License
 
@@ -54,3 +80,4 @@ This work is published under [MIT][mit] License.
 [use-template]: https://github.com/cotes2020/chirpy-starter/generate
 [CD]: https://en.wikipedia.org/wiki/Continuous_deployment
 [mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+[https://github.com/Jo-CRuiSe/unpublished-posts-enhancement]: UnpublishedPostsEnhancementforChirpyTheme
