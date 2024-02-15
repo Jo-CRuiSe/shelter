@@ -1,0 +1,229 @@
+---
+layout: compress
+---
+
+<!doctype html>
+
+{% include origin-type.html %}
+
+{% include lang.html %}
+
+{% if site.theme_mode %}
+{% capture prefer_mode %}data-mode="{{ site.theme_mode }}"{% endcapture %}
+{% endif %}
+
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="{{ site.alt_lang | default: site.lang }}" {{ prefer_mode }}>
+{% include head.html %}
+
+<style>
+    .lab-container {
+        margin: 0 30px;
+    }
+
+    .lab-box {
+        position: relative;
+    }
+
+    .lab-box .list {
+        position: relative;
+        display: flex;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 10px 0;
+        cursor: pointer;
+        transition: 0.5s;
+        overflow: hidden;
+        background: var(--card-bg);
+        box-shadow: var(--card-shadow);
+        border: var(--bs-border-color-translucent);
+    }
+
+    /* .box:hover .list {
+        filter: blur(5px);
+        opacity: 0.25;
+    } */
+
+    .lab-box .list:hover {
+        box-shadow: -10px 20px 35px rgba(0, 0, 0, 0.15);
+        transform: scale(1.02);
+        filter: blur(0px);
+        opacity: 1;
+        cursor: pointer;
+        background: var(--card-hover-bg);
+    }
+
+    /* .box .list .imgBx {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-right: 10px;
+    } */
+
+    /* .box .list .imgBx img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    } */
+
+    .lab-box .list .lab-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: #333;
+    }
+
+    .lab-box .list .lab-content .rank {
+        position: absolute;
+        right: -50px;
+        color: #03a9f4;
+        transition: 0.5s;
+        font-size: 2em;
+    }
+
+    .lab-box .list .lab-content .rank small {
+        font-weight: 500;
+        opacity: 0.25;
+    }
+
+    /* .box .list:hover .content .rank {
+        right: 20px;
+    } */
+
+    .lab-box .list .lab-content h2 {
+        line-height: 1.2em;
+        font-weight: 600;
+    }
+
+    .lab-box .list .lab-content a {
+        color: #034ff4;
+        font-size: 1.05em;
+        text-decoration: none;
+    }
+</style>
+
+<body>
+
+    {% include sidebar.html lang=lang %}
+
+    <div id="main-wrapper" class="d-flex justify-content-center">
+
+        <div class="container d-flex flex-column px-xxl-5">
+
+            {% include topbar.html lang=lang %}
+
+            <div class="lab-container">
+                <div class="lab-box">
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- tail -->
+                <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+                    {% for _include in layout.tail_includes %}
+                    {% assign _include_path = _include | append: '.html' %}
+                    {% include {{ _include_path }} lang=lang %}
+                    {% endfor %}
+
+                    {% include_cached footer.html lang=lang %}
+                </div>
+            </div>
+
+            {% include_cached search-results.html lang=lang %}
+        </div>
+
+        <aside aria-label="Scroll to Top">
+            <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+                <i class="fas fa-angle-up"></i>
+            </button>
+        </aside>
+    </div>
+
+    <div id="mask"></div>
+
+    {% if site.pwa.enabled %}
+    {% include_cached notification.html lang=lang %}
+    {% endif %}
+
+    <!-- JavaScripts -->
+
+    {% include js-selector.html %}
+
+    {% include login-check.html %}
+
+    {% if page.mermaid %}
+    {% include mermaid.html %}
+    {% endif %}
+
+    {% include_cached search-loader.html %}
+
+
+    <script>
+        async function fetchURLTitle(index) {
+            const response = await fetch(`https://jo-cruise.github.io/test/part${index}/index.html`);
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const titleElement = doc.querySelector('title');
+            if (titleElement) {
+                console.log(titleElement.textContent);
+                return titleElement.textContent;
+            } else {
+                return 'NO Title Found';
+            }
+        }
+    </script>
+    <script>
+        function judgeExistance() {
+            var page_index = 1;
+            let listBox = document.querySelector('.lab-box');
+            return new Promise(function (resolve, reject) {
+                (async function () {
+                    while (page_index > 0) {
+                        try {
+                            const response = await fetch(`https://jo-cruise.github.io/test/part${page_index}/index.html`);
+                            if (response.ok) {
+                                console.log(`Link ${page_index} is valid and accessible.`);
+                                let listCard = document.createElement('div');
+                                listCard.classList.add('list');
+                                let content = document.createElement('div');
+                                content.classList.add('lab-content');
+                                let URLTitle = document.createElement('h2');
+                                URLTitle.classList.add('URLTitle');
+                                URLTitle.textContent = await fetchURLTitle(page_index);
+                                let listURL = document.createElement('a');
+                                listURL.classList.add('list-url');
+                                listURL.textContent = `https://jo-cruise.github.io/test/part${page_index}`;
+                                listURL.href = `https://jo-cruise.github.io/test/part${page_index}`;
+                                listURL.target = '_blank';
+                                
+                                listBox.appendChild(listCard);
+                                listCard.appendChild(content);
+                                content.append(URLTitle, listURL);
+                                page_index++;
+                            } else {
+                                console.log('Link is broken or returns a 404 error.');
+                                resolve(page_index);
+                                page_index = 0;
+                            }
+                        } catch (error) {
+                            console.log('Error occurred while checking the link:', error);
+                            reject(-1);
+                            page_index = 0;
+                        }
+                    }
+                })();
+            });
+        }
+    </script>
+    <script>
+        judgeExistance();
+    </script>
+</body>
+
+</html>
