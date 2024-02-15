@@ -47,6 +47,18 @@ mermaid: false
 
 #### [Icon Gallery](https://remixicon.com)
 
+### Font Awesome
+
+#### [Official Document](https://fontawesome.com/docs)
+
+#### Convenient Usage
+
+```html
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+```
+
+#### [Icon Gallery](https://fontawesome.com/search)
+
 ## Fonts
 
 ### [Google Fonts](https://fonts.google.com)
