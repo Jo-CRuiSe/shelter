@@ -1,0 +1,264 @@
+<!-- The Side Bar -->
+<style>
+  #InfoForm {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  animation: appear 0.3s ease-in-out;
+  transition: 0.3s;
+  }
+  
+  @keyframes appear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  }
+  
+  .form-changeInfo input[type="text"], 
+  input[type="url"]
+  {
+    margin: 10px 0 0 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: transparent;
+  }
+  .validatemsg {
+    font-size: 12px;
+    color: gray;
+  }
+  .form-nickname {
+    margin-bottom: 10px;
+  }
+  #avatar::placeholder, #nickname::placeholder {
+    color: rgba(172, 172, 172, 0.733);
+  }
+  .form-buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .form-submit {
+    margin: 0 20px;
+  }
+  .submitChange
+  {
+    background: rgba(0, 123, 255, 0.8);
+    color: #fff;
+    border-radius: 5px;
+    border: transparent;
+  }
+  .form-cancel {
+    margin: 0 20px;
+  }
+  .cancelChange
+  {
+    background: rgba(112, 112, 112, 0.679);
+    color: #fff;
+    border-radius: 5px;
+    border: transparent;
+  }
+</style>
+
+<div id = "InfoForm">
+  <div class = "info">
+      <form target="_self" class="form-changeInfo">
+        <div class="form-avatar">
+          <label for="avatar">请提供新头像的URL:</label>
+          <input type="url" name="avatar" placeholder="Optional" id="newAvatar" onblur="formValidate.checkAvatar()"/>
+          <span class="validatemsg" id="isAvatarValid"></span>
+        </div>
+        <div class="form-nickname">
+          <label for="nickname">请输入您的新昵称: </label>
+          <input type="text" name="nickname" maxlength="15" placeholder="Optional" id="newNickname" onblur="formValidate.checkNickname()"/>
+          <span class="validatemsg" id="isNicknameValid"></span>
+        </div>
+        <div class="form-buttons">
+          <div class="form-submit">
+            <input type="button" class="submitChange" value="Submit" onclick="updateUserInfo()"/>
+          </div>
+          <div class="form-cancel">
+            <input type="button" class="cancelChange" value="Cancel"/>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
+<div class="gal-info"></div>
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <a href="javascript:void(0)" id="changeInfo" onclick="document.getElementById('InfoForm').style.display = 'flex'; document.querySelector('.gal-info').classList.add('active');" style="position: absolute; top: 140px; left: 150px;">
+    <i class="fa-fw fas fa-pen-to-square"></i>
+  </a>
+  <header class="profile-wrapper">
+    <a href="{{ site.baseurl }}" id="avatar" class="rounded-circle">
+      {%- if site.avatar != empty and site.avatar -%}
+      {%- capture avatar_url -%}
+        {% include img-url.html src=site.avatar %}
+      {%- endcapture -%}
+        <img src="{{- avatar_url -}}" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+      {%- endif -%}    
+    </a>
+
+    <div class="site-title">
+      <a href="{{ site.baseurl }}">Hi Guest!</a>
+    </div>
+    <p class="site-subtitle fst-italic mb-0">{{ site.tagline }}</p>
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}">
+        <a href="{{ '/' | relative_url }}" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>{{ site.data.locales[include.lang].tabs.home | upcase }}</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      {% for tab in site.tabs %}
+      <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
+        <a href="{{ tab.url | relative_url }}" class="nav-link">
+          <i class="fa-fw {{ tab.icon }}"></i>
+          {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+
+          <span>{{ site.data.locales[include.lang].tabs.[tab_name] | default: tab.title | upcase }}</span>
+        </a>
+      </li>
+      <!-- .nav-item -->
+    {% endfor %}
+    </ul>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+    {% unless site.theme_mode %}
+      <button type="button" class="mode-toggle btn" aria-label="Switch Mode">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      {% if site.data.contact.size > 0 %}
+        <span class="icon-border"></span>
+      {% endif %}
+    {% endunless %}
+
+    {% for entry in site.data.contact %}
+      {% case entry.type %}
+        {% when 'github', 'twitter' %}
+          {%- capture url -%}
+            https://{{ entry.type }}.com/{{ site[entry.type].username }}
+          {%- endcapture -%}
+        {% when 'email' %}
+          {% assign email = site.social.email | split: '@' %}
+          {%- capture url -%}
+            javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')
+          {%- endcapture -%}
+        {% when 'rss' %}
+          {% assign url = '/feed.xml' | relative_url %}
+        {% else %}
+          {% assign url = entry.url %}
+      {% endcase %}
+
+      {% if url %}
+        <a
+          href="{{ url }}"
+          aria-label="{{ entry.type }}"
+          {% assign link_types = '' %}
+
+          {% unless entry.noblank %}
+            target="_blank"
+            {% assign link_types = 'noopener noreferrer' %}
+          {% endunless %}
+
+          {% if entry.type == 'mastodon' %}
+            {% assign link_types = link_types | append: ' me' | strip %}
+          {% endif %}
+
+          {% unless link_types == empty %}
+            rel="{{ link_types }}"
+          {% endunless %}
+        >
+          <i class="{{ entry.icon }}"></i>
+        </a>
+      {% endif %}
+    {% endfor %}
+      <a href="javascript:void(0);" onclick="AV.User.logOut();setTimeout(function() { window.location.reload(); }, 1000)">
+        <i class="fas fa-right-from-bracket" style="color: rgb(181, 27, 27);"></i>
+      </a>
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->
+
+<script>
+    document.querySelector('.site-subtitle').addEventListener('dblclick', function() {
+      window.location.href = '{{ site.baseurl }}';
+    });
+</script>
+<script>
+  var formValidate = {
+    checkNickname: function() {
+      if (document.getElementById('newNickname').value.trim() != ''){
+        document.getElementById('isNicknameValid').innerHTML = '<i class="fa-fw fas fa-check"></i>';
+        document.getElementById('isNicknameValid').style.color = 'green';
+        return true;
+      } else {
+        document.getElementById('isNicknameValid').innerHTML = '';
+        return true;
+      }
+    },
+    checkAvatar: function() {
+      if (document.getElementById('newAvatar').value.trim().startsWith('https://') || document.getElementById('newAvatar').value.trim().startsWith('http://')) {
+        document.getElementById('isAvatarValid').innerHTML = '<i class="fa-fw fas fa-check"></i>';
+        document.getElementById('isAvatarValid').style.color = 'green';
+        return true;
+      } else if (document.getElementById('newAvatar').value.trim() !='') {
+        document.getElementById('isAvatarValid').innerHTML = '<i class="fa-fw fas fa-xmark"></i>Invalid URL';
+        document.getElementById('isAvatarValid').style.color = 'red';
+      } else {
+        document.getElementById('isAvatarValid').innerHTML = '';
+        return true;
+      }
+    },
+  };
+</script>
+<script>
+  function updateUserInfo() {
+
+    var newAvatar = document.getElementById('newAvatar').value.trim();
+    var newNickname = document.getElementById('newNickname').value.trim(); 
+
+    if (newNickname != ''){
+      currentUser.set("nickname", newNickname);
+    }
+    if (newAvatar != '') {
+      currentUser.set("avatar", newAvatar);
+    }
+    currentUser.save().then((user) => {
+      console.log('保存成功！');
+      if (newAvatar != '' || newNickname != '') {
+        alert("Save Successfully!");
+        window.location.reload();
+      }
+    }).catch((error) => {
+      console.log(error.message);
+    });
+
+  }
+</script>
+<script>
+  document.querySelector('.cancelChange').addEventListener('click', () => {
+    document.getElementById('InfoForm').style.display = 'none';
+    document.querySelector('.gal-info').classList.remove('active');
+    event.preventDefault();
+  });
+</script>
+

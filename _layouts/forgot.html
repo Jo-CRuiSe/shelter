@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <title> Forgot </title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(27, 27, 30);
+        }
+
+        .shell {
+            width: 350px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .title {
+            color: #ffffff;
+            font-size: 60px;
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            height: 50px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            color: black;
+            border: 1px solid #000;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 5px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            width: 30%;
+            height: 30px;
+            padding: 0;
+            margin: 15px 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #fff;
+            background-color: #007bff;
+            cursor: pointer;
+            font-size: 20px;
+            border: none;
+            text-align: center;
+            align-items: center;
+            border-radius: 8px;
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .remember {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #fff;
+        }
+
+        input[type="checkbox"] {
+            display: block;
+            width: 25px;
+            height: 25px;
+        }
+
+
+        #signUp,
+        #forgotPassword {
+            background: none;
+            border: none;
+            text-decoration: underline;
+            font-size: 15px;
+            border-radius: 5px;
+            color: rgba(203, 203, 211, 0.447);
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer;
+        }
+
+
+        /* 浅色模式 */
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: white;
+            }
+
+            .title {
+                color: #2a2a2a;
+            }
+
+            .remember {
+                color: #2a2a2a;
+            }
+
+            #signUp {
+                color: rgba(51, 51, 53, 0.447);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shell">
+        <h2 class="title">Forgot</h2>
+        <input type="email" id="email" placeholder="Enter the email you used to login">
+        <input type="submit" value="Confirm" id="loginBtn">
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+    <script>
+        let appId = '{{ site.Leancloud.appId }}';
+        let appKey = '{{ site.Leancloud.appKey }}';
+        let serverURL = '{{ site.Leancloud.serverURL }}';
+        AV.init({
+            appId: appId,
+            appKey: appKey,
+            serverURL: serverURL,
+        });
+        document.getElementById('loginBtn').addEventListener("click", async function () {
+            var email = document.getElementById("email").value.trim();
+            try {
+                await AV.User.requestPasswordReset(email);
+                alert('The reset-password email was successfully!');
+            } catch (error) {
+                if (error.code == '204') {
+                    alert('The email is missing, please enter your email address.');
+                }
+                else if (error.code == '205') {
+                    alert('The email is invalid.');
+                } else {
+                    alert('An unknown error occurred');
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>
