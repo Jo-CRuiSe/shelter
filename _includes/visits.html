@@ -44,7 +44,7 @@
     }
 
     getUserLocation().then(function (locationData) {
-        if (AV.User.current() == null || AV.User.current() != JoCruise) {
+        if (AV.User.current() == null || AV.User.current().get('username') != 'JoCruise') {
             var currentUrl = window.location.href;
             var ip = locationData.ip;
             var country = locationData.data[0];
@@ -65,7 +65,7 @@
             visitors.save().then(
                 (visitors) => {
                     console.log(`保存成功。objectId：${visitors.id}`);
-                    console.log(ipAddress, currentUrl);
+                    /* console.log(ipAddress, currentUrl); */
                 },
                 (error) => {
                     console.log(error);
