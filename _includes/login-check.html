@@ -9,7 +9,7 @@
     serverURL: serverURL,
   });
 
-  const currentUser = AV.User.current();
+  const currentUser = AV.User.currentAsync();
   
   if (currentUser != null) {
     if (currentUser.get('avatar')) {
