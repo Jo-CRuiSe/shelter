@@ -41,30 +41,6 @@
     const visitors_record = AV.Object.extend('visitors_record');
     const visitors = new visitors_record();
 
-    /* function getUserIP() {
-         return new Promise(function (resolve, reject) {
-             $.getJSON("https://api.ipify.org?format=json", function (data) {
-                 resolve(data.ip);
-             });
-         });
-     }
- 
-     getUserIP().then(function (ipAddress) {
-         visitors.set('visitor_ip', ipAddress);
-         visitors.set('visited_url', currentUrl);
- 
-         visitors.save().then(
-             (visitors) => {
-                 console.log(`保存成功。objectId：${visitors.id}`);
-                 console.log(ipAddress, currentUrl);
-             },
-             (error) => {
-                 console.log(error);
-             }
-         );
-     });
-     */
-
     function getPageInfo() {
         return new Promise(function (resolve, reject) {
             $.getJSON("https://2024.ipchaxun.com/", function (data) {
@@ -100,7 +76,6 @@
             visitors.save().then(
                 (visitors) => {
                     console.log(`${visitors.id}`);
-                    /* console.log(ipAddress, currentUrl); */
                 },
                 (error) => {
                     console.log(error);
@@ -110,17 +85,5 @@
 
     });
 
-    /* visitors.set('visited_url', currentUrl); */
-    /* visitors.set('visitor_ip', ip); */
-
-    /* visitors.save().then(
-        (visitors) => {
-            console.log(`保存成功。objectId：${visitors.id}`);
-            console.log(ip, currentUrl);
-        },
-        (error) => {
-            console.log(error);
-        }
-    ) */
 
 </script>
