@@ -1,5 +1,5 @@
 ---
-title: Spline颜色
+title: Spline材质使用方法
 date: 2024-02-11 08:52:00 +0800
 categories: [Notes, Spline]
 tags: []
