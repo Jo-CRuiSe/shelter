@@ -192,6 +192,13 @@ layout: compress
             return re.test(email);
         }
 
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
         document.getElementById('loginBtn').addEventListener("click", function () {
             var username = document.getElementById('username').value.trim();
             var password = document.getElementById('password').value.trim();
