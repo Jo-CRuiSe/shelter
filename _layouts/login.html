@@ -141,7 +141,7 @@ layout: compress
         <input type="submit" value="Login" id="loginBtn">
         <div class="footer">
             {% if site.Leancloud.allowRegister %}
-                <button id="signUp">Go to Register</button>
+            <button id="signUp">Go to Register</button>
             {% endif %}
             <button id="forgotPassword">Forgot Password?</button>
         </div>
@@ -201,9 +201,13 @@ layout: compress
                         /* 登录成功 */
                         console.log('登录成功');
                         console.log(AV.User.emailVerified);
-                        document.getElementById('username').value = '';
-                        document.getElementById('password').value = '';
-                        window.location.href = '{{ site.baseurl }}';
+                        /* document.getElementById('username').value = '';
+                        document.getElementById('password').value = ''; */
+
+                        let redirectUrl = decodeURIComponent(getUrlParameter('redirect'));
+
+                        window.location.href = redirectUrl;
+                        /* window.location.href = '{{ site.baseurl }}'; */
                     } else {
                         alert('当前用户邮箱未通过验证，暂时无法登录');
                     }

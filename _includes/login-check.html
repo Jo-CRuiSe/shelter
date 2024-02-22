@@ -28,7 +28,10 @@
       document.body.style.display = 'block';
     } else {
       /* 显示注册或登录页面 */
-      window.location.href = '{{ site.baseurl }}/login';
+      let originalUrl = window.location.href;
+
+      window.location.href = '{{ site.baseurl }}/login?redirect=' + encodeURIComponent(originalUrl);
+      /* window.location.href = '{{ site.baseurl }}/login'; */
     }
   };
   /* 在页面加载时调用checkLogin函数检查登录状态 */
