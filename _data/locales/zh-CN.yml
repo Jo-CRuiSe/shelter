@@ -102,3 +102,12 @@ login:
   reset_password_success: 密码重置电子邮件已发送！
   email_missing: 请输入您的电子邮件地址。
   confirm: 确定
+
+# sidebar
+  sidebar:
+  new_avatar: 请提供新头像的网址：
+  new_nickname: 请输入您的新昵称：
+  invalid_url: 非法URL！
+  submit: 提交
+  cancel: 取消
+  save_success: 保存成功！
