@@ -107,7 +107,7 @@ login:
 # sidebar
 sidebar:
   new_avatar: Please provide the URL of the new avatar
-  new_nickname: Please enter your new nickname:
+  new_nickname: Please enter your new nickname
   invalid_url: Invalid URL
   submit: Submit
   cancel: Cancel
