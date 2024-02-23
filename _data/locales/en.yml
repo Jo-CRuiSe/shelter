@@ -89,7 +89,7 @@ login:
   waiting_for_verification: Registration successful, waiting for email verification. Message has been sent!
   register: Register
   register_fail: Register failed!
-  email_not_verified: The current user's email has not been verified and cannot be logged in temporarily.
+  email_not_verified: The current user\'s email has not been verified and cannot be logged in temporarily.
   logout: Logout
   forgot: Forgot
   forgot_prompt: Enter your registered email address
