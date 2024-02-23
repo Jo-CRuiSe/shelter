@@ -126,7 +126,7 @@
 <body>
     {% include lang.html %}
     <div class="shell">
-        <h2 class="title">Forgot</h2>
+        <h2 class="title">{{ site.data.locales[lang].login.forgot }}</h2>
         <input type="email" id="email" placeholder="{{ site.data.locales[lang].login.forgot_prompt }}">
         <input type="submit" value="{{ site.data.locales[lang].login.confirm }}" id="loginBtn">
     </div>
