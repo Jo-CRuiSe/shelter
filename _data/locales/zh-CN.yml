@@ -99,6 +99,6 @@ login:
   new_username: 新用户名
   new_password: 新密码
   email: 邮箱(必填)
-  reset_password_success: The reset-password email was successfully!
-  email_missing: The email is missing, please enter your email address.
+  reset_password_success: 密码重置电子邮件已发送！
+  email_missing: 请输入您的电子邮件地址。
   confirm: 确定

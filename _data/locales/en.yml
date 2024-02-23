@@ -101,6 +101,6 @@ login:
   new_password: New Password
   email: Email(MUST)
   reset_password_success: The reset-password email was successfully!
-  email_missing: The email is missing, please enter your email address.
+  email_missing: Please enter your email address.
   confirm: Confirm
 
