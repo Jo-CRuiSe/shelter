@@ -136,15 +136,15 @@ layout: compress
     {% include lang.html %}
     <div class="shell">
         <h2 class="title">{{ site.data.locales[lang].login.login }}</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <input type="email" id="email" placeholder="Email(MUST)">
+        <input type="text" id="username" placeholder="{{ site.data.locales[lang].login.username }}">
+        <input type="password" id="password" placeholder="{{ site.data.locales[lang].login.password }}">
+        <input type="email" id="email" placeholder="{{ site.data.locales[lang].login.email }}">
         <input type="submit" value="Login" id="loginBtn">
         <div class="footer">
             {% if site.Leancloud.allowRegister %}
-            <button id="signUp">Go to Register</button>
+            <button id="signUp">{{ site.data.locales[lang].login.go_to_register }}</button>
             {% endif %}
-            <button id="forgotPassword">Forgot Password?</button>
+            <button id="forgotPassword">{{ site.data.locales[lang].login.forgot_password }}</button>
         </div>
     </div>
 
@@ -154,22 +154,22 @@ layout: compress
             var title = document.querySelector('.title');
             var loginBtn = document.getElementById('loginBtn');
             var signUpBtn = document.getElementById('signUp');
-            if (title.innerText == 'Login') {
-                title.innerText = 'Register';
-                loginBtn.value = 'Register';
-                signUpBtn.innerText = 'Go to login';
+            if (title.innerText == '{{ site.data.locales[lang].login.login }}') {
+                title.innerText = '{{ site.data.locales[lang].login.register }}';
+                loginBtn.value = '{{ site.data.locales[lang].login.register }}';
+                signUpBtn.innerText = '{{ site.data.locales[lang].login.go_to_login }}';
                 document.getElementById('username').value = '';
                 document.getElementById('password').value = '';
-                document.getElementById('username').placeholder = 'New User Name';
-                document.getElementById('password').placeholder = 'New Password';
+                document.getElementById('username').placeholder = '{{ site.data.locales[lang].login.new_username }}';
+                document.getElementById('password').placeholder = '{{ site.data.locales[lang].login.new_password }}';
                 document.getElementById('password').type = 'password';
                 document.getElementById('email').style.display = 'block';
             } else {
-                title.innerText = 'Login';
-                loginBtn.value = 'Login';
-                signUpBtn.innerText = 'Go to register';
-                document.getElementById('username').placeholder = 'Username';
-                document.getElementById('password').placeholder = 'Password';
+                title.innerText = '{{ site.data.locales[lang].login.login }}';
+                loginBtn.value = '{{ site.data.locales[lang].login.login }}';
+                signUpBtn.innerText = '{{ site.data.locales[lang].login.go_to_register }}';
+                document.getElementById('username').placeholder = '{{ site.data.locales[lang].login.username }}';
+                document.getElementById('password').placeholder = '{{ site.data.locales[lang].login.password }}';
                 document.getElementById('password').type = 'password';
                 document.getElementById('email').style.display = 'none';
             }
@@ -207,7 +207,7 @@ layout: compress
                 AV.User.logIn(username, password).then(function (user) {
                     if (user.get("emailVerified")) {
                         /* 登录成功 */
-                        console.log('登录成功');
+                        console.log('Successfully logged in');
                         console.log(AV.User.emailVerified);
                         /* document.getElementById('username').value = '';
                         document.getElementById('password').value = ''; */
@@ -217,23 +217,23 @@ layout: compress
                         window.location.href = redirectUrl;
                         /* window.location.href = '{{ site.baseurl }}'; */
                     } else {
-                        alert('当前用户邮箱未通过验证，暂时无法登录');
+                        alert('{{ site.data.locales[lang].login.email_not_verified }}');
                     }
                 }).catch(function (error) {
                     /* 登录失败，处理错误信息 */
-                    console.log('登录失败：', error);
-                    alert('登录失败！');
+                    console.log('Login failed:', error);
+                    alert('{{ site.data.locales[lang].login.login_fail }}');
                 });
             } else {
                 var email = document.getElementById('email').value;
                 if (!validateEmail(email)) {
-                    alert('请输入有效的电子邮件地址！');
+                    alert('{{ site.data.locales[lang].login.enter_vaild_email }}');
                     return;
                 } else if (username == '') {
-                    alert('请输入用户名');
+                    alert('{{ site.data.locales[lang].login.enter_username }}');
                     return;
                 } else if (password == '') {
-                    alert('请输入密码');
+                    alert('{{ site.data.locales[lang].login.enter_password }}');
                     return;
                 } else {
                     const user = new AV.User();
@@ -244,13 +244,13 @@ layout: compress
 
                     user.signUp().then(function (user) {
                         /* 注册成功 */
-                        alert('注册成功，等待验证邮箱。邮件已发送！');
+                        alert('{{ site.data.locales[lang].login.waiting_for_verification }}');
                         console.log('注册成功，等待验证邮箱');
                         window.location.reload();
                     }).catch(function (error) {
                         /* 注册失败，处理错误信息 */
                         console.log('注册失败：', error);
-                        alert('注册失败！');
+                        alert('{{ site.data.locales[lang].login.register_fail }}');
                     });
                 }
             };

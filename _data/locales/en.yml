@@ -87,7 +87,7 @@ login:
   login: Login
   login_fail: Login Failed!
   enter_vaild_email: Please enter vaild email address!
-  waiting_for_varification: Registration successful, waiting for email verification. Message has been sent!
+  waiting_for_verification: Registration successful, waiting for email verification. Message has been sent!
   register: Register
   register_fail: Register Failed!
   email_not_verified: The current user's email has not been verified and cannot be logged in temporarily.
@@ -95,6 +95,7 @@ login:
   forgot: Forgot
   forgot_prompt: Enter your registered email address
   forgot_password: Forgot Password?
+  go_to_login: Go to Login
   go_to_register: Go to Register
   new_username: New Username
   new_password: New Password

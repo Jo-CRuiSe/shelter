@@ -86,7 +86,7 @@ login:
   login: 登录
   login_fail: 登录失败！
   enter_vaild_email: 请输入有效的邮箱地址！
-  waiting_for_varification: 注册成功，等待验证邮箱。邮件已发送！
+  waiting_for_verification: 注册成功，等待验证邮箱。邮件已发送！
   register: 注册
   register_fail: 注册失败！
   email_not_verified: 当前用户邮箱未通过验证，暂时无法登录
@@ -94,6 +94,7 @@ login:
   forgot: 忘记密码
   forgot_prompt: 输入您注册时的邮箱
   forgot_password: 忘记密码？
+  go_to_login: 去登录
   go_to_register: 去注册
   new_username: 新用户名
   new_password: 新密码
