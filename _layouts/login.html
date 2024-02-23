@@ -139,7 +139,7 @@ layout: compress
         <input type="text" id="username" placeholder="{{ site.data.locales[lang].login.username }}">
         <input type="password" id="password" placeholder="{{ site.data.locales[lang].login.password }}">
         <input type="email" id="email" placeholder="{{ site.data.locales[lang].login.email }}">
-        <input type="submit" value="Login" id="loginBtn">
+        <input type="submit" value="{{ site.data.locales[lang].login.login }}" id="loginBtn">
         <div class="footer">
             {% if site.Leancloud.allowRegister %}
             <button id="signUp">{{ site.data.locales[lang].login.go_to_register }}</button>
@@ -203,7 +203,7 @@ layout: compress
         document.getElementById('loginBtn').addEventListener("click", function () {
             var username = document.getElementById('username').value.trim();
             var password = document.getElementById('password').value.trim();
-            if (document.querySelector('.title').innerText == 'Login') {
+            if (document.querySelector('.title').innerText == '{{ site.data.locales[lang].login.login }}') {
                 AV.User.logIn(username, password).then(function (user) {
                     if (user.get("emailVerified")) {
                         /* 登录成功 */
