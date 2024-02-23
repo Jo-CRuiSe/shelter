@@ -200,6 +200,20 @@ layout: compress
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
+        function getReturnUrlFromParams() {
+            var params = new URLSearchParams(window.location.search);
+            return params.get("redirect");
+        }
+
+        function redirectToReturnUrl() {
+            var returnUrl = getReturnUrlFromParams();
+            if (returnUrl) {
+                window.location.href = returnUrl;
+            } else {
+                window.location.href = '{{ site.baseurl}}';
+            }
+        }
+
         document.getElementById('loginBtn').addEventListener("click", function () {
             var username = document.getElementById('username').value.trim();
             var password = document.getElementById('password').value.trim();
@@ -212,15 +226,17 @@ layout: compress
                         /* document.getElementById('username').value = '';
                         document.getElementById('password').value = ''; */
 
-                        let redirectUrl = decodeURIComponent(getUrlParameter('redirect'));
+                        /* let redirectUrl = decodeURIComponent(getUrlParameter('redirect')); */
+                        /* let redirectUrl = "login?redirect" + encodeURIComponent(window.location.href);
 
-                        if(redirectUrl!=''){
+                        if (redirectUrl != '') {
                             window.location.href = redirectUrl;
                         }
                         else {
                             window.location.href = '{{ site.baseurl }}';
-                        }
-                        
+                        } */
+                        redirectToReturnUrl()
+
                     } else {
                         alert('{{ site.data.locales[lang].login.email_not_verified }}');
                     }
