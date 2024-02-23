@@ -11,7 +11,6 @@ layout:
 tabs:
   # format: <filename_without_extension>: <value>
   home: Home
-  gallery: Gallery
   categories: Categories
   tags: Tags
   archives: Archives
@@ -85,11 +84,11 @@ login:
   enter_username: Please enter your username
   enter_password: Please enter your password
   login: Login
-  login_fail: Login Failed!
-  enter_vaild_email: Please enter vaild email address!
+  login_fail: Login failed!
+  enter_vaild_email: Please enter valid email address!
   waiting_for_verification: Registration successful, waiting for email verification. Message has been sent!
   register: Register
-  register_fail: Register Failed!
+  register_fail: Register failed!
   email_not_verified: The current user's email has not been verified and cannot be logged in temporarily.
   logout: Logout
   forgot: Forgot

@@ -80,15 +80,35 @@ categories:
 # login and forgot page
 login:
   username: 사용자 이름
-  password: 암호
+  password: 비밀번호
+  enter_username: 사용자 이름을 입력하세요
+  enter_password: 비밀번호를 입력해주세요
   login: 로그인
-  register: 등록
-  logout: 로그오프
-  forgot: 비밀번호를 잊어버렸습니다
-  forgot_prompt: 등록할 때 사용한 이메일 주소를 입력하세요.
-  forgot_password: 비밀번호를 잊으셨나요?
-  go_to_register: 등록으로 이동
+  login_fail: 로그인 실패!
+  enter_vaild_email: 유효한 이메일 주소를 입력해주세요!
+  waiting_for_verification: 등록이 완료되었습니다. 이메일 확인을 기다리는 중입니다. 메시지가 전송되었습니다!
+  register: 등록하다
+  register_fail: 등록 실패!
+  email_not_verified: 현재 사용자의 이메일은 인증되지 않아 일시적으로 로그인이 불가능합니다.
+  logout: 로그 아웃
+  forgot: 암호를 재설정
+  forgot_prompt: 등록된 이메일 주소를 입력하세요
+  forgot_password: 비밀번호를 잊으 셨나요?
+  go_to_login: 로그인으로 이동
+  go_to_register: 등록하러 가기
   new_username: 새 사용자 이름
   new_password: 새 비밀번호
-  email: 이메일 (필수)
-  confirm: 확실한가요
+  email: 이메일(필수)
+  reset_password_success: 비밀번호 재설정 메일이 발송되었습니다!
+  email_missing: 당신의 이메일 주소를 입력하십시오.
+  confirm: 확신하는
+
+# sidebar
+sidebar:
+  new_avatar: 새 아바타의 URL을 제공해 주세요.
+  new_nickname: 새로운 닉네임을 입력해주세요
+  optional: 선택 과목
+  invalid_url: 잘못된 URL
+  submit: 제출하다
+  cancel: 취소
+  save_success: 성공적으로 저장되었습니다!
