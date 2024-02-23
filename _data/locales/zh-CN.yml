@@ -104,7 +104,7 @@ login:
   confirm: 确定
 
 # sidebar
-  sidebar:
+sidebar:
   new_avatar: 请提供新头像的网址
   new_nickname: 请输入您的新昵称
   invalid_url: 非法URL！
