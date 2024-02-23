@@ -76,3 +76,19 @@ post:
 categories:
   category_measure: 카테고리
   post_measure: 포스트
+
+# login and forgot page
+login:
+  username: 사용자 이름
+  password: 암호
+  login: 로그인
+  register: 등록
+  logout: 로그오프
+  forgot: 비밀번호를 잊어버렸습니다
+  forgot_prompt: 등록할 때 사용한 이메일 주소를 입력하세요.
+  forgot_password: 비밀번호를 잊으셨나요?
+  go_to_register: 등록으로 이동
+  new_username: 새 사용자 이름
+  new_password: 새 비밀번호
+  email: 이메일 (필수)
+  confirm: 확실한가요

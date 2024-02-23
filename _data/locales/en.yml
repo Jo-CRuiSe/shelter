@@ -77,3 +77,27 @@ post:
 categories:
   category_measure: categories
   post_measure: posts
+
+# login and forgot page
+login:
+  username: Username
+  password: Password
+  enter_username: Please enter your username
+  enter_password: Please enter your password
+  login: Login
+  login_fail: Login Failed!
+  enter_vaild_email: Please enter vaild email address!
+  waiting_for_varification: Registration successful, waiting for email verification. Message has been sent!
+  register: Register
+  register_fail: Register Failed!
+  email_not_verified: The current user's email has not been verified and cannot be logged in temporarily.
+  logout: Logout
+  forgot: Forgot
+  forgot_prompt: Enter the email you used to login
+  forgot_password: Forgot Password?
+  go_to_register: Go to Register
+  new_username: New Username
+  new_password: New Password
+  email: Email(MUST)
+  confirm: Confirm
+

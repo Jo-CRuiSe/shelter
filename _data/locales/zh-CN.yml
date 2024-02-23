@@ -76,3 +76,19 @@ post:
 categories:
   category_measure: 个分类
   post_measure: 篇文章
+
+# login and forgot page
+login:
+  username: 用户名
+  password: 密码
+  login: 登录
+  register: 注册
+  logout: 登出
+  forgot: 忘记密码
+  forgot_prompt: 输入您注册时的邮箱
+  forgot_password: 忘记密码？
+  go_to_register: 去注册
+  new_username: 新用户名
+  new_password: 新密码
+  email: 邮箱(必填)
+  confirm: 确定
