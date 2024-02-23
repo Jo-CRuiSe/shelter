@@ -28,9 +28,15 @@
       document.body.style.display = 'block';
     } else {
       /* 显示注册或登录页面 */
-      let originalUrl = window.location.href;
 
-      window.location.href = '{{ site.baseurl }}/login?redirect=' + encodeURIComponent(originalUrl);
+      let originalUrl = window.location.href;
+      if(originalUrl == '{{ site.url }} {{ site.baseurl }}/login') {
+        window.location.href = '{{ site.url }}{{ site.baseurl }}';
+      } else {
+        window.location.href = '{{ site.baseurl }}/login?redirect=' + encodeURIComponent(originalUrl);
+      }
+      
+
       /* window.location.href = '{{ site.baseurl }}/login'; */
     }
   };
