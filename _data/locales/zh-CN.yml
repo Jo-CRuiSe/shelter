@@ -81,8 +81,15 @@ categories:
 login:
   username: 用户名
   password: 密码
+  enter_username: Please enter your username
+  enter_password: Please enter your password
   login: 登录
+  login_fail: Login Failed!
+  enter_vaild_email: Please enter vaild email address!
+  waiting_for_varification: Registration successful, waiting for email verification. Message has been sent!
   register: 注册
+  register_fail: Register Failed!
+  email_not_verified: The current user's email has not been verified and cannot be logged in temporarily.
   logout: 登出
   forgot: 忘记密码
   forgot_prompt: 输入您注册时的邮箱
