@@ -214,8 +214,13 @@ layout: compress
 
                         let redirectUrl = decodeURIComponent(getUrlParameter('redirect'));
 
-                        window.location.href = redirectUrl;
-                        /* window.location.href = '{{ site.baseurl }}'; */
+                        if(redirectUrl!=''){
+                            window.location.href = redirectUrl;
+                        }
+                        else {
+                            window.location.href = '{{ site.baseUrl }}';
+                        }
+                        
                     } else {
                         alert('{{ site.data.locales[lang].login.email_not_verified }}');
                     }
