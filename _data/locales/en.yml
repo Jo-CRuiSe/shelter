@@ -100,7 +100,7 @@ login:
   new_username: New Username
   new_password: New Password
   email: Email(MUST)
-  reset_password_success: The reset-password email was successfully!
+  reset_password_success: Password reset email has been sent!
   email_missing: Please enter your email address.
   confirm: Confirm
 
