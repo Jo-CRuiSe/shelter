@@ -2,8 +2,6 @@
 <style>
   #InfoForm {
   display: flex;
-  visibility: 0;
-  opacity: 0;
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -14,6 +12,11 @@
   z-index: 9999;
   animation: appear 0.3s ease-in-out;
   transition: all 0.3s;
+  }
+
+  #InfoForm.active {
+    animation: disappear 0.3s ease-in-out;
+    transition: all 0.3s;
   }
 
   .gal-info {
@@ -29,6 +32,18 @@
     opacity: 1;
     transform: translate(-50%, -50%);
   }
+  }
+
+  @keyframes appear {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+
   }
 
   .form-changeInfo input[type="text"], 
@@ -100,7 +115,7 @@
 </div>
 <div class="gal-info"></div>
 <aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
-  <a href="javascript:void(0)" id="changeInfo" onclick="document.getElementById('InfoForm').style.visibility = '1'; document.getElementById('InfoForm').style.opacity = '1'; document.querySelector('.gal-info').classList.add('active');" style="position: absolute; top: 140px; left: 150px;">
+  <a href="javascript:void(0)" id="changeInfo" onclick="document.getElementById('InfoForm').classList.add('active'); document.querySelector('.gal-info').classList.add('active');" style="position: absolute; top: 140px; left: 150px;">
     <i class="fa-fw fas fa-pen-to-square"></i>
   </a>
   <header class="profile-wrapper">
@@ -261,7 +276,7 @@
 </script>
 <script>
   document.querySelector('.cancelChange').addEventListener('click', () => {
-    document.getElementById('InfoForm').style.display = 'none';
+    document.getElementById('InfoForm').classList.remove('active');
     document.querySelector('.gal-info').classList.remove('active');
     event.preventDefault();
   });
