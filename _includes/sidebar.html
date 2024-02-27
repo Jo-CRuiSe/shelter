@@ -1,9 +1,9 @@
 <!-- The Side Bar -->
 <style>
   #InfoForm {
-  display: flex;
   visibility: 0;
   opacity: 0;
+  display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -13,14 +13,12 @@
   transform: translate(-50%, -50%);
   z-index: 9999;
   animation: appear 0.3s ease-in-out;
-  transition: all 0.3s;
   }
 
   #InfoForm.active {
     visibility: visible;
     opacity: 1;
     animation: disappear 0.3s ease-in-out;
-    transition: all 0.3s;
   }
 
   .gal-info {
