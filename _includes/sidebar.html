@@ -2,6 +2,8 @@
 <style>
   #InfoForm {
   display: flex;
+  visibility: 0;
+  opacity: 0;
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -15,6 +17,8 @@
   }
 
   #InfoForm.active {
+    visibility: visible;
+    opacity: 1;
     animation: disappear 0.3s ease-in-out;
     transition: all 0.3s;
   }
