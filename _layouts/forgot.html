@@ -67,6 +67,10 @@
             border-radius: 8px;
         }
 
+        #forgotBtn:active {
+            transform: scale(0.98);
+        }
+
         .footer {
             display: flex;
             flex-direction: row;
@@ -130,7 +134,7 @@
     <div class="shell">
         <h2 class="title">{{ site.data.locales[lang].login.forgot }}</h2>
         <input type="email" id="email" placeholder="{{ site.data.locales[lang].login.forgot_prompt }}">
-        <input type="submit" value="{{ site.data.locales[lang].login.confirm }}" id="loginBtn">
+        <input type="submit" value="{{ site.data.locales[lang].login.confirm }}" id="forgotBtn">
     </div>
 
 
@@ -144,7 +148,7 @@
             appKey: appKey,
             serverURL: serverURL,
         });
-        document.getElementById('loginBtn').addEventListener("click", async function () {
+        document.getElementById('forgotBtn').addEventListener("click", async function () {
             var email = document.getElementById("email").value.trim();
             try {
                 await AV.User.requestPasswordReset(email);

@@ -100,7 +100,6 @@ layout: compress
             height: 25px;
         }
 
-
         #signUp,
         #forgotPassword {
             background: none;
@@ -111,6 +110,39 @@ layout: compress
             color: rgba(203, 203, 211, 0.447);
             font-family: Arial, Helvetica, sans-serif;
             cursor: pointer;
+        }
+
+        .privacy-declare {
+            position: fixed; 
+            bottom: 20px;
+            left: 20px;
+            transition: all .4s ease-in-out;
+        }
+
+        .privacy-declare:hover i{
+            visibility: 0;
+            opacity: 0;
+            transition: all .4s ease-in-out;
+        }
+
+        .privacy-declare:hover .privacy-content{
+            left: 30px;
+            width: 100%;
+            visibility: 1;
+            opacity: 1;
+            transition: all .4s ease-in-out;
+        }
+
+        .privacy-content {
+            max-width: 80vw;
+            position: fixed; 
+            margin: 0;
+            bottom: 20px;
+            left: -120%;
+            visibility: 0;
+            opacity: 0;
+            animation-delay: 0.2s;
+            transition: all .4s ease-in-out;
         }
 
         /* 浅色模式 */
@@ -151,6 +183,11 @@ layout: compress
             <button id="signUp">{{ site.data.locales[lang].login.go_to_register }}</button>
             {% endif %}
             <button id="forgotPassword">{{ site.data.locales[lang].login.forgot_password }}</button>
+        </div>
+        <div class="privacy-declare">
+            <i class="fas fa-info-circle"></i>
+            <p class="privacy-content">We cannot get access to your password and other sensitive information.</p>
+            </div>
         </div>
     </div>
 
@@ -289,6 +326,13 @@ layout: compress
         var forgotBtn = document.getElementById('forgotPassword');
         forgotBtn.addEventListener('click', function () {
             window.location.href = '{{ site.baseurl }}/login/forgot';
+        });
+    </script>
+
+    <script>
+        let privacyDeclare =  document.querySelector('.privacy-declare');
+        privacyDeclare.addEventListener('click', function () {
+            
         });
     </script>
 </body>
