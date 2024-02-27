@@ -19,7 +19,6 @@
     display: flex;
     visibility: visible;
     opacity: 1;
-    transform: translate(-50%, -50%);
     animation: appear 0.3s ease-in-out;
   }
 
@@ -28,10 +27,6 @@
   }
   
   @keyframes appear {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -60%);
-  }
   to {
     opacity: 1;
     transform: translate(-50%, -50%);
@@ -39,10 +34,7 @@
   }
 
   @keyframes disappear {
-  from {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
+
   to {
     opacity: 0;
     transform: translate(-50%, -60%);
