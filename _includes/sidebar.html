@@ -1,6 +1,6 @@
 <!-- The Side Bar -->
 <style>
-  #InfoForm {
+  .info-form {
   visibility: hidden;
   opacity: 0;
   display: flex;
@@ -15,7 +15,7 @@
   animation: disappear 0.3s ease-in-out;
   }
 
-  #InfoForm.active {
+  .info-form.active {
     visibility: visible;
     opacity: 1;
     animation: appear 0.3s ease-in-out;
@@ -91,7 +91,7 @@
 </style>
 
 {% include lang.html %}
-<div id = "InfoForm">
+<div id = "InfoForm" class="info-form">
   <div class = "info">
       <form target="_self" class="form-changeInfo">
         <div class="form-avatar">
