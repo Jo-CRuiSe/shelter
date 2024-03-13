@@ -165,7 +165,7 @@ Leancloud:
   appKey: '6sPXQuSvQBiMk60c7sFhRPVz' # fill with your Leancloud appKey
   serverURL: 'https://rzv27a2i.lc-cn-n1-shared.com' # fill with your Leancloud serverURL
   allowRegister: true # allow registration for your website
-  needLogin: false # need login to visit your website?
+  needLogin: true # need login to visit your website?
 
 # ------------ The following options are not recommended to be modified ------------------
 
