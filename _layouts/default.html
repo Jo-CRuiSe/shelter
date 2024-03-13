@@ -15,7 +15,7 @@ layout: compress
 <!-- `site.alt_lang` can specify a language different from the UI -->
 <html lang="{{ site.alt_lang | default: site.lang }}" {{ prefer_mode }}>
   {% include head.html %}
-  <body style="display: none;">
+  <body>
     {% include loader.html %}
 
     {% include sidebar.html lang=lang %}
@@ -77,7 +77,9 @@ layout: compress
 
     <!-- JavaScripts -->
 
-    {% include login-check.html %}
+    {% if site.Leancloud.needLogin %}
+      {% include login-check.html %}
+    {% endif %}
 
     <!-- {% include visits.html %} -->
 
@@ -98,3 +100,9 @@ layout: compress
     
   </body>
 </html>
+
+{% if site.Leancloud.needLogin %}
+  <script>
+    document.querySelector('body').style.display = 'none';
+  </script>
+{% endif %}

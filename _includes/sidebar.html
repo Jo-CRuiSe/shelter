@@ -93,35 +93,39 @@
 </style>
 
 {% include lang.html %}
-<div id = "InfoForm" class="info-form">
-  <div class = "info">
-      <form target="_self" class="form-changeInfo">
-        <div class="form-avatar">
-          <label for="avatar">{{ site.data.locales[lang].sidebar.new_avatar }}</label>
-          <input type="url" name="avatar" placeholder="{{ site.data.locales[lang].sidebar.optional }}" id="newAvatar" onblur="formValidate.checkAvatar()"/>
-          <span class="validatemsg" id="isAvatarValid"></span>
-        </div>
-        <div class="form-nickname">
-          <label for="nickname">{{ site.data.locales[lang].sidebar.new_nickname }}</label>
-          <input type="text" name="nickname" maxlength="15" placeholder="{{ site.data.locales[lang].sidebar.optional }}" id="newNickname" onblur="formValidate.checkNickname()"/>
-          <span class="validatemsg" id="isNicknameValid"></span>
-        </div>
-        <div class="form-buttons">
-          <div class="form-submit">
-            <input type="button" class="submitChange" value="{{ site.data.locales[lang].sidebar.submit }}" onclick="updateUserInfo()"/>
+{% if site.Leancloud.needLogin %}
+  <div id = "InfoForm" class="info-form">
+    <div class = "info">
+        <form target="_self" class="form-changeInfo">
+          <div class="form-avatar">
+            <label for="avatar">{{ site.data.locales[lang].sidebar.new_avatar }}</label>
+            <input type="url" name="avatar" placeholder="{{ site.data.locales[lang].sidebar.optional }}" id="newAvatar" onblur="formValidate.checkAvatar()"/>
+            <span class="validatemsg" id="isAvatarValid"></span>
           </div>
-          <div class="form-cancel">
-            <input type="button" class="cancelChange" value="{{ site.data.locales[lang].sidebar.cancel }}"/>
+          <div class="form-nickname">
+            <label for="nickname">{{ site.data.locales[lang].sidebar.new_nickname }}</label>
+            <input type="text" name="nickname" maxlength="15" placeholder="{{ site.data.locales[lang].sidebar.optional }}" id="newNickname" onblur="formValidate.checkNickname()"/>
+            <span class="validatemsg" id="isNicknameValid"></span>
           </div>
-        </div>
-      </form>
+          <div class="form-buttons">
+            <div class="form-submit">
+              <input type="button" class="submitChange" value="{{ site.data.locales[lang].sidebar.submit }}" onclick="updateUserInfo()"/>
+            </div>
+            <div class="form-cancel">
+              <input type="button" class="cancelChange" value="{{ site.data.locales[lang].sidebar.cancel }}"/>
+            </div>
+          </div>
+        </form>
+    </div>
   </div>
-</div>
-<div class="gal-info"></div>
+  <div class="gal-info"></div>
+{% endif %}
 <aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
-  <a href="javascript:void(0)" id="changeInfo" onclick="document.getElementById('InfoForm').classList.add('active'); document.querySelector('.gal-info').classList.add('active');" style="position: absolute; top: 140px; left: 150px;">
-    <i class="fa-fw fas fa-pen-to-square"></i>
-  </a>
+  {% if site.Leancloud.needLogin %}
+    <a href="javascript:void(0)" id="changeInfo" onclick="document.getElementById('InfoForm').classList.add('active'); document.querySelector('.gal-info').classList.add('active');" style="position: absolute; top: 140px; left: 150px;">
+      <i class="fa-fw fas fa-pen-to-square"></i>
+    </a>
+  {% endif %}
   <header class="profile-wrapper">
     <a href="{{ site.baseurl }}" id="avatar" class="rounded-circle">
       {%- if site.avatar != empty and site.avatar -%}
@@ -133,7 +137,7 @@
     </a>
 
     <div class="site-title">
-      <a href="{{ site.baseurl }}">Hi Guest!</a>
+      <a href="{{ site.baseurl }}">{{site.social.name}}</a>
     </div>
     <p class="site-subtitle fst-italic mb-0">{{ site.tagline }}</p>
   </header>
@@ -214,9 +218,11 @@
         </a>
       {% endif %}
     {% endfor %}
+    {% if site.Leancloud.needLogin %}
       <a href="javascript:void(0);" onclick="AV.User.logOut();setTimeout(function() { window.location.reload(); }, 1000)" title="{{ site.data.locales[lang].login.logout }}">
         <i class="fas fa-right-from-bracket" style="color: rgb(181, 27, 27);"></i>
       </a>
+    {% endif %}
   </div>
   <!-- .sidebar-bottom -->
 </aside>
@@ -227,61 +233,62 @@
       window.location.href = '/';
     });
 </script>
-<script>
-  var formValidate = {
-    checkNickname: function() {
-      if (document.getElementById('newNickname').value.trim() != ''){
-        document.getElementById('isNicknameValid').innerHTML = '<i class="fa-fw fas fa-check"></i>';
-        document.getElementById('isNicknameValid').style.color = 'green';
-        return true;
-      } else {
-        document.getElementById('isNicknameValid').innerHTML = '';
-        return true;
-      }
-    },
-    checkAvatar: function() {
-      if (document.getElementById('newAvatar').value.trim().startsWith('https://') || document.getElementById('newAvatar').value.trim().startsWith('http://')) {
-        document.getElementById('isAvatarValid').innerHTML = '<i class="fa-fw fas fa-check"></i>';
-        document.getElementById('isAvatarValid').style.color = 'green';
-        return true;
-      } else if (document.getElementById('newAvatar').value.trim() !='') {
-        document.getElementById('isAvatarValid').innerHTML = '<i class="fa-fw fas fa-xmark"></i>{{ site.data.locales[lang].sidebar.invalid_url }}';
-        document.getElementById('isAvatarValid').style.color = 'red';
-      } else {
-        document.getElementById('isAvatarValid').innerHTML = '';
-        return true;
-      }
-    },
-  };
-</script>
-<script>
-  function updateUserInfo() {
+{% if site.Leancloud.needLogin %}
+  <script>
+    var formValidate = {
+      checkNickname: function() {
+        if (document.getElementById('newNickname').value.trim() != ''){
+          document.getElementById('isNicknameValid').innerHTML = '<i class="fa-fw fas fa-check"></i>';
+          document.getElementById('isNicknameValid').style.color = 'green';
+          return true;
+        } else {
+          document.getElementById('isNicknameValid').innerHTML = '';
+          return true;
+        }
+      },
+      checkAvatar: function() {
+        if (document.getElementById('newAvatar').value.trim().startsWith('https://') || document.getElementById('newAvatar').value.trim().startsWith('http://')) {
+          document.getElementById('isAvatarValid').innerHTML = '<i class="fa-fw fas fa-check"></i>';
+          document.getElementById('isAvatarValid').style.color = 'green';
+          return true;
+        } else if (document.getElementById('newAvatar').value.trim() !='') {
+          document.getElementById('isAvatarValid').innerHTML = '<i class="fa-fw fas fa-xmark"></i>{{ site.data.locales[lang].sidebar.invalid_url }}';
+          document.getElementById('isAvatarValid').style.color = 'red';
+        } else {
+          document.getElementById('isAvatarValid').innerHTML = '';
+          return true;
+        }
+      },
+    };
+  </script>
+  <script>
+    function updateUserInfo() {
 
-    var newAvatar = document.getElementById('newAvatar').value.trim();
-    var newNickname = document.getElementById('newNickname').value.trim(); 
+      var newAvatar = document.getElementById('newAvatar').value.trim();
+      var newNickname = document.getElementById('newNickname').value.trim(); 
 
-    if (newNickname != ''){
-      currentUser.set("nickname", newNickname);
-    }
-    if (newAvatar != '') {
-      currentUser.set("avatar", newAvatar);
-    }
-    currentUser.save().then((user) => {
-      console.log('保存成功！');
-      if (newAvatar != '' || newNickname != '') {
-        alert("{{ site.data.locales[lang].sidebar.save_success }}");
-        window.location.reload();
+      if (newNickname != ''){
+        currentUser.set("nickname", newNickname);
       }
-    }).catch((error) => {
-      console.log(error.message);
+      if (newAvatar != '') {
+        currentUser.set("avatar", newAvatar);
+      }
+      currentUser.save().then((user) => {
+        console.log('保存成功！');
+        if (newAvatar != '' || newNickname != '') {
+          alert("{{ site.data.locales[lang].sidebar.save_success }}");
+          window.location.reload();
+        }
+      }).catch((error) => {
+        console.log(error.message);
+      });
+
+    }
+  </script>
+  <script>
+    document.querySelector('.cancelChange').addEventListener('click', () => {
+      document.querySelector('.info-form').classList.remove('active');
+      document.querySelector('.gal-info').classList.remove('active');
     });
-
-  }
-</script>
-<script>
-  document.querySelector('.cancelChange').addEventListener('click', () => {
-    document.querySelector('.info-form').classList.remove('active');
-    document.querySelector('.gal-info').classList.remove('active');
-  });
-</script>
-
+  </script>
+{% endif %}

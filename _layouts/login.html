@@ -1,6 +1,4 @@
----
-layout: compress
----
+{% if site.Leancloud.needLogin %}
 <!DOCTYPE html>
 <html>
 
@@ -50,17 +48,15 @@ layout: compress
             border-radius: 10px;
             padding: 5px;
             font-size: 1rem;
-            outline: none;
+            /* outline: none; */
         }
 
         #email {
             display: none;
         }
 
-        input[type="submit"] {
-            width: 30%;
-            height: 30px;
-            padding: 0;
+        #loginBtn {
+            padding: 5px 20px;
             margin: 15px 0;
             font-family: Arial, Helvetica, sans-serif;
             color: #fff;
@@ -70,7 +66,8 @@ layout: compress
             border: none;
             text-align: center;
             align-items: center;
-            border-radius: 8px;
+            border-radius: 1000px;
+            cursor: pointer;
         }
 
         #loginBtn:active {
@@ -140,12 +137,13 @@ layout: compress
 
 <body>
     {% include lang.html %}
+
     <div class="shell">
         <h2 class="title">{{ site.data.locales[lang].login.login }}</h2>
         <input type="text" id="username" placeholder="{{ site.data.locales[lang].login.username }}" required>
         <input type="password" id="password" placeholder="{{ site.data.locales[lang].login.password }}" required>
         <input type="email" id="email" placeholder="{{ site.data.locales[lang].login.email }}" required>
-        <input type="submit" value="{{ site.data.locales[lang].login.login }}" id="loginBtn">
+        <button id="loginBtn">{{ site.data.locales[lang].login.login }}</button>
         <div class="footer">
             {% if site.Leancloud.allowRegister %}
             <button id="signUp">{{ site.data.locales[lang].login.go_to_register }}</button>
@@ -153,6 +151,7 @@ layout: compress
             <button id="forgotPassword">{{ site.data.locales[lang].login.forgot_password }}</button>
         </div>
     </div>
+
 
     <script>
 
@@ -162,7 +161,7 @@ layout: compress
             var signUpBtn = document.getElementById('signUp');
             if (title.innerText == '{{ site.data.locales[lang].login.login }}') {
                 title.innerText = '{{ site.data.locales[lang].login.register }}';
-                loginBtn.value = '{{ site.data.locales[lang].login.register }}';
+                loginBtn.innerText = '{{ site.data.locales[lang].login.register }}';
                 signUpBtn.innerText = '{{ site.data.locales[lang].login.go_to_login }}';
                 document.getElementById('username').value = '';
                 document.getElementById('password').value = '';
@@ -172,7 +171,7 @@ layout: compress
                 document.getElementById('email').style.display = 'block';
             } else {
                 title.innerText = '{{ site.data.locales[lang].login.login }}';
-                loginBtn.value = '{{ site.data.locales[lang].login.login }}';
+                loginBtn.innerText = '{{ site.data.locales[lang].login.login }}';
                 signUpBtn.innerText = '{{ site.data.locales[lang].login.go_to_register }}';
                 document.getElementById('username').placeholder = '{{ site.data.locales[lang].login.username }}';
                 document.getElementById('password').placeholder = '{{ site.data.locales[lang].login.password }}';
@@ -229,18 +228,7 @@ layout: compress
                         /* 登录成功 */
                         console.log('Successfully logged in');
                         console.log(AV.User.emailVerified);
-                        /* document.getElementById('username').value = '';
-                        document.getElementById('password').value = ''; */
 
-                        /* let redirectUrl = decodeURIComponent(getUrlParameter('redirect')); */
-                        /* let redirectUrl = "login?redirect" + encodeURIComponent(window.location.href);
-
-                        if (redirectUrl != '') {
-                            window.location.href = redirectUrl;
-                        }
-                        else {
-                            window.location.href = '{{ site.baseurl }}';
-                        } */
                         redirectToReturnUrl()
 
                     } else {
@@ -249,7 +237,7 @@ layout: compress
                 }).catch(function (error) {
                     /* 登录失败，处理错误信息 */
                     console.log('Login failed:', error);
-                    alert('{{ site.data.locales[lang].login.login_fail }}');
+                    alert('{{ site.data.locales[lang].login.login_fail }}' + '\n' + error.message.replace(/\[.*?\]/g, ''));
                 });
             } else {
                 var email = document.getElementById('email').value;
@@ -292,12 +280,13 @@ layout: compress
         });
     </script>
 
-    <script>
-        let privacyDeclare =  document.querySelector('.privacy-declare');
-        privacyDeclare.addEventListener('click', function () {
-            
-        });
-    </script>
 </body>
 
 </html>
+{% else %}
+
+<script>
+    window.location.href = '{{ site.baseurl}}';
+</script>
+
+{% endif%}
