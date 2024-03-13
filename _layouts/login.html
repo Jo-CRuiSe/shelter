@@ -142,9 +142,9 @@ layout: compress
     {% include lang.html %}
     <div class="shell">
         <h2 class="title">{{ site.data.locales[lang].login.login }}</h2>
-        <input type="text" id="username" placeholder="{{ site.data.locales[lang].login.username }}">
-        <input type="password" id="password" placeholder="{{ site.data.locales[lang].login.password }}">
-        <input type="email" id="email" placeholder="{{ site.data.locales[lang].login.email }}">
+        <input type="text" id="username" placeholder="{{ site.data.locales[lang].login.username }}" required>
+        <input type="password" id="password" placeholder="{{ site.data.locales[lang].login.password }}" required>
+        <input type="email" id="email" placeholder="{{ site.data.locales[lang].login.email }}" required>
         <input type="submit" value="{{ site.data.locales[lang].login.login }}" id="loginBtn">
         <div class="footer">
             {% if site.Leancloud.allowRegister %}

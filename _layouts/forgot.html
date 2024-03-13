@@ -133,7 +133,7 @@
     {% include lang.html %}
     <div class="shell">
         <h2 class="title">{{ site.data.locales[lang].login.forgot }}</h2>
-        <input type="email" id="email" placeholder="{{ site.data.locales[lang].login.forgot_prompt }}">
+        <input type="email" id="email" placeholder="{{ site.data.locales[lang].login.forgot_prompt }}" required>
         <input type="submit" value="{{ site.data.locales[lang].login.confirm }}" id="forgotBtn">
     </div>
 
