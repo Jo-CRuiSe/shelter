@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "jekyll-theme-chirpy-customized-upe", "~> 3.1.2"
+gem "jekyll-theme-chirpy-customized-upe", "~> 4.0.0"
 
 group :test do
   gem "html-proofer", "~> 4.4"

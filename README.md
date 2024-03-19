@@ -3,13 +3,21 @@
 [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy-customized-upe)][gem]&nbsp;
 [![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
 
-*Derived from Chirpy theme*
+*Derived from [Chirpy][chirpy] theme*
+
+[中文版](https://github.com/Jo-CRuiSe/jekyll-theme-chirpy-customized-upe/blob/master/README%20(CN).md)
+
+## Why do I need this customization?
+
+While using the Chirpy theme, I have noticed some functionalities that are different from what I'm accustomed to and some functionalities that are still missing. These include implementing blog login access (the current repository should be set to private or deployed to my own server), enhancing the Mathjax plugin, and changing the UI style, among others. Additionally, this serves as a challenge to test my frontend coding skills.
+
+> The next steps are similar to the Chirpy documentation
 
 ## Installation
 
 ### Creating a New URL
 
-Sign in to GitHub and browse to [**unpublished-posts-enhancement**](https://github.com/Jo-CRuiSe/unpublished-posts-enhancement), click the button <kbd>Use this template</kbd> > <kbd>Create a new repository</kbd>, and name the new repository to what you like which represents your unpulished posts pages URL.
+Sign in to GitHub and browse to [**unpublished-posts-enhancement**](https://github.com/Jo-CRuiSe/unpublished-posts-enhancement), click the button <kbd>[Use this template][use-template]</kbd> > <kbd>Create a new repository</kbd>, and name the new repository to what you like which represents your unpulished posts pages URL.
 
 ### Installing Dependencies
 
@@ -31,7 +39,7 @@ After a few seconds, the local service will be published at _<http://127.0.0.1:4
 
 ## Deployment
 
-Before the deployment begins, check out the file `_config.yml`{: .filepath} and make sure the `url` is configured correctly. Remember to change the `baseurl` to your project name that starts with a slash, e.g, `/project-name`.
+Before the deployment begins, check out the file `_config.yml`and make sure the `url` is configured correctly. Remember to change the `baseurl` to your project name that starts with a slash, e.g, `/project-name`.
 
 Now you can choose _ONE_ of the following methods to deploy your Jekyll site.
 
@@ -40,7 +48,7 @@ Now you can choose _ONE_ of the following methods to deploy your Jekyll site.
 There are a few things to get ready for.
 
 - If you're on the GitHub Free plan, keep your site repository public.
-- If you have committed `Gemfile.lock`{: .filepath} to the repository, and your local machine is not running Linux, go to the root of your site and update the platform list of the lock-file:
+- If you have committed `Gemfile.lock` to the repository, and your local machine is not running Linux, go to the root of your site and update the platform list of the lock-file:
 
   ```console
   $ bundle lock --add-platform x86_64-linux
@@ -64,7 +72,7 @@ Go to the root of the source project, and build your site as follows:
 $ JEKYLL_ENV=production bundle exec jekyll b
 ```
 
-Unless you specified the output path, the generated site files will be placed in folder `_site`{: .filepath} of the project's root directory. Now you should upload those files to the target server.
+Unless you specified the output path, the generated site files will be placed in folder `_site`of the project's root directory. Now you should upload those files to the target server.
 
 ## Configuration
 
@@ -75,9 +83,8 @@ Unless you specified the output path, the generated site files will be placed in
 
 This work is published under [MIT][mit] License.
 
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
+[gem]: https://rubygems.org/gems/jekyll-theme-chirpy-customized-upe
 [chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[use-template]: https://github.com/cotes2020/chirpy-starter/generate
+[use-template]: https://github.com/Jo-CRuiSe/unpublished-posts-enhancement/generate
 [CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
-[https://github.com/Jo-CRuiSe/unpublished-posts-enhancement]: UnpublishedPostsEnhancementforChirpyTheme
+[mit]: https://github.com/Jo-CRuiSe/jekyll-theme-chirpy-customized-upe/blob/master/LICENSE
