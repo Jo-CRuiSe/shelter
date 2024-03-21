@@ -1,5 +1,6 @@
+<!-- This code is only used for data analysis to improve user experience and will not be leaked to third parties -->
 <script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script> -->
 <script>
 
     AV.init({
@@ -44,7 +45,7 @@
     }
 
     getPageInfo().then(function (locationData) {
-        if (AV.User.current() == null || AV.User.current().get('username') != 'JoCruise') {
+        if (AV.User.current() == null || AV.User.current().get('username') != 'JoCruise' || !window.location.href.includes('127.0.0.1')) {
             var currentUrl = window.location.href;
             var ip = locationData.ip;
             var country = locationData.data[0];
