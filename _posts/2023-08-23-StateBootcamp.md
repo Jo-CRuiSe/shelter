@@ -1,6 +1,6 @@
 ---
 title: StateBootcamp
-date: 2024-08-23 14:34:00 +0800
+date: 2023-08-23 14:34:00 +0800
 categories: [Notes, Swift, BeginnerLevel]
 tags: [StateBootcamp]
 pin: false
