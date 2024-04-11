@@ -76,7 +76,7 @@ Unless you specified the output path, the generated site files will be placed in
 
 ## Configuration
 
-[This blog](https://jo-cruise.github.io/2024-02-06-HowToUseUPE) will guide you to complete relative configuration.
+[This blog](https://jo-cruise.github.io/posts/HowToUseUPE) will guide you to complete relative configuration.
 
 
 ## License

@@ -74,7 +74,7 @@ $ JEKYLL_ENV=production bundle exec jekyll b
 
 ## 配置
 
-[此博客](https://jo-cruise.github.io/2024-02-06-HowToUseUPE)将指导您完成相关配置。
+[此博客](https://jo-cruise.github.io/posts/HowToUseUPE)将指导您完成相关配置。
 
 ## 许可证
 
